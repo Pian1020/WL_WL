@@ -1,6 +1,12 @@
-import pandas as pd
 import zipfile
 import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.colors import LinearSegmentedColormap
+from pylab import *
+from datetime import datetime, timedelta
 
 def createDataset(path):
     dfs_wind = []
@@ -60,19 +66,24 @@ def createDataset(path):
                         wind_directions = [row[col] for col in df.columns if 'Wind Direction' in col]
                         horizontal_speeds = [row[col] for col in df.columns if 'Horizontal Wind Speed' in col]
                         vertical_speeds = [row[col] for col in df.columns if 'Vertical Wind Speed' in col]
+                        datetime_str = row["Time and Date"]
+                        datetime_obj = [datetime.strptime(datetime_str, "%d/%m/%Y %H:%M:%S")] * len(heights)
                         
                         # Create a DataFrame for each row
                         height_df = pd.DataFrame({
-                            'Height (m)': heights,
-                            'Wind Direction (deg)': wind_directions,
-                            'Horizontal Wind Speed (m/s)': horizontal_speeds,
-                            'Vertical Wind Speed (m/s)': vertical_speeds
+                            'Height': heights,
+                            'Wind Direction': wind_directions,
+                            'Horizontal Wind Speed': horizontal_speeds,
+                            'Vertical Wind Speed': vertical_speeds,
+                            'datetime': datetime_obj
                         })
 
                         # Append the DataFrame to the list
                         dfs_wind.append(height_df)
+    # Convert the list of DataFrames to a single DataFrame
+    df_multi = pd.concat(dfs_wind)
     
-    return dfs_wind
+    return df_multi
 
 if __name__ == "__main__":
     # Determine the file path
@@ -80,5 +91,5 @@ if __name__ == "__main__":
     file_path = root + "/ProcessedData"
 
     # Read files from the disk and process the data
-    dfs_wind = createDataset(file_path)
-    print(dfs_wind)
+    dataset = createDataset(file_path)
+    print(dataset)
