@@ -165,8 +165,8 @@ def draw(dataset, start_time, end_time, start_height, end_height):
     plt.clim(0, 12)
     
     # Specify step value to select data at intervals of time
-    step_hours = 200  # Select every N data
-    selected_datetimes = adjusted_dataset['datetime'].unique()[100::step_hours]
+    step_hours = 6  # Select every N data
+    selected_datetimes = adjusted_dataset['datetime'].unique()[2::step_hours]
 
     # Specify step value to select data at intervals of height
     step_heights = 1  # Select every N data
@@ -214,7 +214,7 @@ if __name__ == "__main__":
     
     # Determine the file path
     root = os.getcwd()
-    file_path = root + "/ProcessedData"
+    file_path = root + "/ProcessedData10"
 
     # Read files from the disk and process the data
     dataset = createDataset(file_path)
