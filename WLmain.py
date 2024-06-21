@@ -193,7 +193,7 @@ def draw(dataset, start_time, end_time, start_height, end_height):
     if end_date_minus_1 <= start_date_str :
         title = f'UV-Wind profile of Halo Lidar at WL during {start_date_str}'
     else:
-        title = f'UV-Wind profile of Halo Lidar at WL during Feb {start_date_str}-{end_date_minus_1}, 2024'
+        title = f'UV-Wind profile of Halo Lidar at WL during Feb {start_date_str}-29, 2024'
     plt.title(title, fontsize=16)
     
     # Show the plot
@@ -207,8 +207,8 @@ if __name__ == "__main__":
     end_time = input()
     start_height = int(input())
     end_height = int(input()) """
-    start_time = "2024/02/14 00:00:00"
-    end_time = "2024/02/17 00:00:00"
+    start_time = "2024/02/27 08:00:00"
+    end_time = "2024/02/29 08:00:00"
     start_height = 0
     end_height = 200
     
